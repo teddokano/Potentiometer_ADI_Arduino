@@ -32,6 +32,8 @@ public:
 	 *	Dummy
 	 */
 	virtual	void begin( void );
+protected:
+	uint8_t	_value;
 };
 
 class AD5161_I2C : public AD5161_base, public I2C_device
@@ -62,6 +64,15 @@ public:
 	 * @return potentiometer position
 	 */
 	uint8_t value( void );	
+
+	/** A short hand for setting pins
+	 */
+	AD5161_I2C&	operator=( uint8_t v );
+	AD5161_I2C&	operator=( AD5161_I2C& rhs );
+
+	/** A short hand for reading pins
+	 */
+	operator	int();
 };
 
 class AD5161_SPI : public AD5161_base
@@ -80,6 +91,12 @@ public:
 	 * @return potentiometer position
 	 */
 	uint8_t value( uint8_t v );	
+
+	/** Get value
+	 *
+	 * @return potentiometer position
+	 */
+	uint8_t value( void );	
 	
 	/** Send/receive data
 	 * 
@@ -88,6 +105,14 @@ public:
 	 */
 	void txrx( uint8_t *data, int size );
 
+	/** A short hand for setting pins
+	 */
+	AD5161_SPI&	operator=( uint8_t v );
+	AD5161_SPI&	operator=( AD5161_SPI& rhs );
+
+	/** A short hand for reading pins
+	 */
+	operator	int();
 };
 
 #endif //	ARDUINO_AD5161_H
